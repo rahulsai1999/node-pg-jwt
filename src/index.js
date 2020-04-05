@@ -4,10 +4,8 @@ import morgan from "morgan";
 import bodyParser from "body-parser";
 import cookieParser from "cookie-parser";
 import cors from "cors";
-import passport from "passport";
-import { Strategy as LocalStrategy } from "passport-local";
 
-import { connectAuthenticate } from "../controllers/dbConnect";
+import { connectAuthenticate } from "./controllers/dbConnect";
 
 //test connection
 connectAuthenticate();

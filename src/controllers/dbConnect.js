@@ -5,10 +5,11 @@ dotenv.config();
 const pg_db = process.env.PG_DB;
 const pg_user = process.env.PG_USER;
 const pg_pass = process.env.PG_PASS;
+const pg_host = process.env.PG_HOST;
 
 const sequelize = new Sequelize(pg_db, pg_user, pg_pass, {
-  host: "localhost",
-  dialect: "postgres"
+  host: pg_host,
+  dialect: "postgres",
 });
 
 const connectAuthenticate = () => {
@@ -17,9 +18,9 @@ const connectAuthenticate = () => {
     .then(() => {
       console.log("Connected");
     })
-    .catch(err => {
+    .catch((err) => {
       console.log("Error");
     });
 };
 
-export { sequelize, connectAuthenticate };
+export { sequelize as sqlConn, connectAuthenticate };
