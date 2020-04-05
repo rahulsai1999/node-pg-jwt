@@ -13,6 +13,13 @@ const findAllBlogs = (req, res) => {
   });
 };
 
+const findOneBlog = (req, res) => {
+  const { id } = req.params;
+  Blog.findOne({ where: { id: id } }).then((blog) =>
+    res.json({ message: "Blog retrieved", result: blog })
+  );
+};
+
 const updateBlog = (req, res) => {
   const { id } = req.params;
   const { title, author, body } = req.body;
@@ -31,4 +38,4 @@ const deleteBlog = (req, res) => {
   });
 };
 
-export { createBlog, findAllBlogs, updateBlog, deleteBlog };
+export { createBlog, findAllBlogs, updateBlog, deleteBlog, findOneBlog };
