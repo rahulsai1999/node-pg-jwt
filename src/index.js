@@ -5,11 +5,10 @@ import bodyParser from "body-parser";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 import passport from "passport";
-import { ExtractJwt, Strategy as JwtStrategy } from "passport-jwt";
-import { getUser } from "./controllers/userCon";
 
 //user imports
 import { sequelize, connectAuthenticate } from "./util/dbConnect";
+import { strategy } from "./util/strategy";
 
 //routes
 import blogRoutes from "./routes/blogRoute";
@@ -18,21 +17,6 @@ import authRoutes from "./routes/authRoutes";
 //test connection, sync tables and initialises passport
 connectAuthenticate();
 sequelize.sync();
-
-let jwtOptions = {
-  jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-  secretOrKey: "rerere",
-};
-
-let strategy = new JwtStrategy(jwtOptions, (jwt_payload, next) => {
-  console.log("Payload", jwt_payload);
-  let user = getUser({ id: jwt_payload.id });
-  if (user) {
-    next(null, user);
-  } else {
-    next(null, false);
-  }
-});
 
 //utilities
 const app = express();
