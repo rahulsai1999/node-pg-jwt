@@ -1,10 +1,16 @@
 import { sequelize } from "../controllers/dbConnect";
-import { Sequelize } from "sequelize";
+import { DataTypes } from "sequelize";
+import shortid from "shortid";
 
 const Blog = sequelize.define("blogs", {
-  title: { type: Sequelize.STRING },
-  author: { type: Sequelize.STRING },
-  body: { type: Sequelize.STRING },
+  id: {
+    type: DataTypes.STRING,
+    primaryKey: true,
+    defaultValue: shortid.generate,
+  },
+  title: { type: DataTypes.STRING },
+  author: { type: DataTypes.STRING },
+  body: { type: DataTypes.STRING },
 });
 
 export default Blog;
