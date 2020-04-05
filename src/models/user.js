@@ -8,8 +8,8 @@ const User = sequelize.define("users", {
     primaryKey: true,
     defaultValue: shortid.generate,
   },
-  email: { type: DataTypes.STRING },
-  password: { type: DataTypes.STRING },
+  email: { type: DataTypes.STRING, allowNull: false },
+  password: { type: DataTypes.STRING, allowNull: false },
   name: { type: DataTypes.STRING },
 });
 
