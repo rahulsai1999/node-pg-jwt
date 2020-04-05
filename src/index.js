@@ -4,16 +4,18 @@ import morgan from "morgan";
 import bodyParser from "body-parser";
 import cookieParser from "cookie-parser";
 import cors from "cors";
+import passport from "passport";
 
-//database
-import { sequelize, connectAuthenticate } from "./controllers/dbConnect";
-
+//user imports
+import { sequelize, connectAuthenticate } from "./util/dbConnect";
+import { strategy } from "./util/strategy";
 //routes
 import blogRoutes from "./routes/blogRoute";
 
-//test connection
+//test connection and sync tables
 connectAuthenticate();
 sequelize.sync();
+passport.use(strategy);
 
 //utilities
 const app = express();
@@ -22,6 +24,7 @@ app.use(morgan("dev"));
 app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(passport.initialize());
 
 //routes
 app.get("/", (req, res) => {
