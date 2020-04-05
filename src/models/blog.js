@@ -9,7 +9,6 @@ const Blog = sequelize.define("blogs", {
     defaultValue: shortid.generate,
   },
   title: { type: DataTypes.STRING },
-  author: { type: DataTypes.STRING },
   body: { type: DataTypes.STRING },
 });
 
