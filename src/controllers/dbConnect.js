@@ -23,4 +23,4 @@ const connectAuthenticate = () => {
     });
 };
 
-export { sequelize as sqlConn, connectAuthenticate };
+export { sequelize, connectAuthenticate };
