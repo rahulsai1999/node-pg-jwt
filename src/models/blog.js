@@ -1,4 +1,4 @@
-import { sequelize } from "../controllers/dbConnect";
+import { sequelize } from "../util/dbConnect";
 import { DataTypes } from "sequelize";
 import shortid from "shortid";
 
