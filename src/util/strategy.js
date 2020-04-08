@@ -1,19 +1,25 @@
 import { ExtractJwt, Strategy as JwtStrategy } from "passport-jwt";
-import { getUser } from "../controllers/userCon";
+import dotenv from "dotenv";
+import User from "../models/user";
+
+dotenv.config();
 
 let jwtOptions = {
   jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-  secretOrKey: "rerere",
+  secretOrKey: process.env.SECRET,
 };
 
 let strategy = new JwtStrategy(jwtOptions, (jwt_payload, next) => {
   console.log("Payload", jwt_payload);
-  let user = getUser({ id: jwt_payload.id });
-  if (user) {
-    next(null, user);
-  } else {
-    next(null, false);
-  }
+  User.findOne({ id: jwt_payload.id }).then((user) => {
+    if (user) {
+      console.log(user);
+      next(null, user);
+    } else {
+      console.log("null");
+      next(null, false);
+    }
+  });
 });
 
 export { strategy, jwtOptions };

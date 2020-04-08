@@ -3,12 +3,6 @@ import jwt from "jsonwebtoken";
 import User from "../models/user";
 import { jwtOptions } from "../util/strategy";
 
-const getUser = (obj) => {
-  User.findOne({ where: obj }).then((user) => {
-    return user;
-  });
-};
-
 const createUser = (req, res) => {
   let { name, email, password } = req.body;
   const salt = bcrypt.genSaltSync(5);
@@ -36,4 +30,4 @@ const loginUser = (req, res) => {
     });
 };
 
-export { getUser, createUser, loginUser };
+export { createUser, loginUser };
