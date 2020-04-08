@@ -10,13 +10,10 @@ let jwtOptions = {
 };
 
 let strategy = new JwtStrategy(jwtOptions, (jwt_payload, next) => {
-  console.log("Payload", jwt_payload);
   User.findOne({ id: jwt_payload.id }).then((user) => {
     if (user) {
-      console.log(user);
       next(null, user);
     } else {
-      console.log("null");
       next(null, false);
     }
   });
